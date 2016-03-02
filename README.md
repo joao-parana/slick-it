@@ -29,6 +29,20 @@ For example, the server may have cached the following generated markup:
 </div>
 ```
 
+Generate this HTML code.
+
+```html
+<div id="my-carousel" data-slick='{"slidesToShow": 2, "slidesToScroll": 1}' is="slick-it" path="/img" slides="26, 76, 18, 37" provider="local">
+  <div><h3>1</h3><img src="/img/slide26.png"></div>
+  <div><h3>2</h3><img src="/img/slide76.png"></div>
+  <div><h3>3</h3><img src="/img/slide18.png"></div>
+  <div><h3>4</h3><img src="/img/slide37.png"></div>
+</div>
+<script>
+  $('div#my-carousel').slick()
+</script>
+```
+
 provider can be "wordpress" too.
 
 ## Installation
