@@ -17,6 +17,12 @@
 
     docker run -i -t --name slick_it parana/slick-it
 
+## Running with python SimpleHTTPServer
+
+```bash
+python -m SimpleHTTPServer 8000
+```
+
 ## Description 
 
 Render a Slick It Carousel.
