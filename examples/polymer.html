@@ -2,17 +2,33 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <script src="CustomElements.min.js"></script>
+  <script src="../CustomElements.min.js"></script>
+  <script src="../jquery-1.12.1.min.js"></script>
+  <script src="../jquery-migrate-1.2.1.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="../slick.css"/>
+  <script src="../slick.min.js"></script>
   <script src="../slick-it.js"></script>
 </head>
 <body>
   <p>
     Local provider:
-    <div is="slick-it" path="/img" slides="26, 76, 18, 37" provider="local"></div>
+    <div class="my-slick" is="slick-it" path="/img" slides="26, 76, 18, 37" provider="local">
+      <div>Meu Conteúdo</div>
+      <div>Meu Outro Conteúdo</div>
+    </div>
   </p>
 
   <p>
     <hr />
   </p>
+  <script>
+    $('div.my-slick').slick({
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1
+    });
+  </script>
 </body>
 </html>

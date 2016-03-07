@@ -1,6 +1,26 @@
 (function() {
   'use strict';
 
+  // Internal: Array tracking all elements attached to the document that need
+  // to be updated every minute.
+  var nowElements = [];
+
+  // Internal: Timer ID for `updateNowElements` interval.
+  var updateNowElementsId;
+
+  // Internal: Install a timer to refresh all attached relative-time elements every
+  // minute.
+  function updateNowElements() {
+    var myElem, i, len;
+    for (i = 0, len = nowElements.length; i < len; i++) {
+      myElem = nowElements[i];
+      // myElem.textContent = myElem.getFormattedDate();
+      $(myElem).slick('slickAdd','<div><h3>' + 1 + '</h3></div>');
+      $(myElem).slick('slickAdd','<div><h3>' + 2 + '</h3></div>');
+      $(myElem).slick('slickAdd','<div><h3>' + 3 + '</h3></div>');
+    }
+  }
+
   function pad(num) {
     return ('0' + num).slice(-2);
   }
@@ -54,6 +74,7 @@
   var SlickItPrototype = Object.create(ExtendedDivPrototype);
 
   ExtendedDivPrototype.createdCallback = function() {
+    console.log('createdCallback');
     var value = this.getAttribute('datetime');
     if (value) {
       this.attributeChangedCallback('datetime', null, value);
@@ -61,21 +82,24 @@
   };
 
   ExtendedDivPrototype.getFormattedDate = function() {
+    console.log('getFormattedDate');
     if (this._date) {
       return new SlickIt(this._date).toString();
     }
   };
 
   ExtendedDivPrototype.attachedCallback = function() {
+    console.log('attachedCallback');
     nowElements.push(this);
 
     if (!updateNowElementsId) {
       updateNowElements();
-      updateNowElementsId = setInterval(updateNowElements, 60 * 1000);
+      // updateNowElementsId = setInterval(updateNowElements, 1 * 1000);
     }
   };
 
   ExtendedDivPrototype.detachedCallback = function() {
+    console.log('detachedCallback');
     var ix = nowElements.indexOf(this);
     if (ix !== -1) {
       nowElements.splice(ix, 1);
